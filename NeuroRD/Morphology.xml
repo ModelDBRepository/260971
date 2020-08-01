@@ -1,0 +1,9 @@
+<Morphology>
+
+    <Segment id="seg1" region="dendrite">
+	<start x="1.0" y="1.0" z="0.0" r="0.5"/>
+	<end x="2.0" y="1.0" z="0.0" r="0.5"/>
+    </Segment>
+
+</Morphology>
+

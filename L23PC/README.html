@@ -1,0 +1,44 @@
+<html><pre>
+Scripts used for the multi-compartmental NEURON simulations in order to determine the Ca2+ currents through NMDA-receptor channels when the timing between pre- and post-synaptic
+stimulation is varied. The minimum amount of data for drawing Fig. 6 is pre-saved in the .mat files. The mod mechanisms and hoc files are from the NMC portal: https://bbp.epfl.ch/nmc-portal/
+
+Scripts adapted by Tuomo Maki-Marttunen 2018-2020 from simulation scripts at https://bbp.epfl.ch/nmc-portal/microcircuit#/metype/L23_PC_cADpyr/details (CC BY-NC-SA 4.0)
+
+Files and directories included:
+ L23_PC_cADpyr229_*
+  -Directories containing the morphology files of five L23PCs.
+ biophysics.hoc
+  -A hoc file containing the biophysical parameters of all five L23PCs.
+
+ collectcurrs_manyinputs_varyNMDA_oneISI.py
+  -A python file used for collecting data from simulations with different random numberr seeds.
+
+ currClips*_neckLen0.5_neckDiam0.1_stimfreq1.0_pulseamp5.0_Nsyn1_Ninputs1apic250-300_Econ0.0004_wNMDA7.0_ISI*.mat
+  -Pre-saved mat-files saved by collectcurrs_manyinputs_varyNMDA_oneISI.py
+
+ init_nogui.hoc
+  -A hoc file for initializing the simulations
+
+ mechanisms
+  -A directory for the mod files (ion-channel mechanisms)
+
+ morph_accurate_segdata_icell*.sav
+  -Pre-saved data files for plotting the morphology of all five cells
+
+ morphology.hoc
+  -A hoc file for loading the morphologies of the five cells
+
+ mytools.py
+  -Generic tools
+
+ runmodelsyns_exconly_stim_localspines_manyinputs_varyNMDA.py
+  -A python script for running the simulation of the paired stimulus protocol
+
+ template.hoc
+  -A hoc file with the cell templates
+
+
+In order to run any of these scripts, first compile the mechanisms by running
+nrnivmodl ./mechanisms
+
+</pre></html>

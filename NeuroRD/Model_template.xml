@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SDRun xmlns:xi="http://www.w3.org/2001/XInclude" xmlns="http://stochdiff.textensor.org">
+    <xi:include href="Reactions.xml" />
+    <xi:include href="Morphology.xml" />
+    <xi:include href="Stimulations_template.xml" />
+    <xi:include href="IC_singlecompartment.xml" />
+    <geometry>          2D           </geometry>
+    <depth2D>           0.5          </depth2D>
+    <distribution>      BINOMIAL     </distribution>
+    <algorithm>         INDEPENDENT  </algorithm>
+    <simulationSeed>    245         </simulationSeed>
+
+    <runtime>2000</runtime>
+    <spineSeed>13</spineSeed>
+    <discretization>
+      <defaultMaxElementSide>0.2</defaultMaxElementSide>
+      <MaxElementSide region="dendrite">1.0</MaxElementSide>
+      <spineDeltaX>0.1</spineDeltaX>
+    </discretization>
+
+    <tolerance>0.001</tolerance>
+    <outputInterval>100</outputInterval>
+    <calculation>GRID_ADAPTIVE</calculation>
+
+</SDRun>

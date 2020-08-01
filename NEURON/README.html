@@ -1,0 +1,137 @@
+<html><pre>
+Scripts used for the single-compartment simulations of the plasticity in the post-synaptic spine using NEURON RxD simulator. Contains
+also the scripts for drawing the Figures of the paper.
+
+N.B. Version 7.5 of NEURON needed. Some problems found with version 7.6-7.7: the line "reaction256 = rxd.Reaction(specs[195] > specs[195]*0, ks[404])"
+in model_nrn*.py should be replaced with an alternative reaction describing the decay of ACh, e.g.
+"specs.append(rxd.Species(cyt, name='null', charge=0, initial=0.0)); reaction256 = rxd.Reaction(specs[195] > specs[-1], ks[404])"
+
+Files included:
+ calcconds.py
+  -The calculation of synaptic conductance based on types and numbers of GluR1s and GluR2s at the membrane. Used by drawfig6.py, other scripts
+   include nested calculations.
+
+ calcconds_dimerdimer.py
+  -The calculation of synaptic conductance based on types and numbers of GluR1s and GluR2s at the membrane using a "dimer of like dimers" rule.
+
+ drawfig1.py
+  -Draws Figure 1. Before running this, run the simulations in script runfig1.sh in this folder.
+
+ drawfig3.py
+  -Draws Figure 3. Before running this, run the simulations in script runfig3.sh in this folder and runfig3_nrd.sh in ../NeuroRD.
+
+ drawfig4.py
+  -Draws Figure 4. Before running this, run the simulations in script runfig4-5.sh in this folder and runfig4-5_nrd.sh in ../NeuroRD.
+
+ drawfig4_1.py
+  -Draws Figure 4.1 (Extended data set). Before running this, run the simulations in script runfig4_1.sh in this folder.
+
+ drawfig5.py
+  -Draws Figure 5. Before running this, run the simulations in script runfig4-5.sh in this folder and runfig4-5_nrd.sh in ../NeuroRD.
+
+ drawfig6.py
+  -Draws Figure 6. Before running this, run the simulations in script runfig6.sh in this folder.
+
+ drawfig9abc.py
+  -Draws Figure 9 panels A-C. Before running this, run the simulations in script runfig9.sh in this folder.
+
+ emoo.py
+  -A multi-objective optimization algorithm from Bahl et al. 2012 with slight modifications. Used for fitting the parameters for Fig. 9 - not needed here for fitting though.
+
+ fit_cAMP_withdiss_1d.py
+  -A python script that simulates the PKA activation given cAMP input. Runs the script model_nrn_testPKA_withdiss_williamson_varyrates.py
+   and processes the results. Used for Fig. 1.
+
+ fits_goodparams.mat
+  -Pre-saved parameters from the fittings. Needed by fitter_fewer1withCK_check_given.py and fitter_fewer_check_given.py.
+
+ fits_goodparams_manyb.mat
+  -Pre-saved parameters from the fittings with many parameters. Needed by fitter_manyb_check_given.py.
+
+ fitter_fewer.py
+  -A python script that fits the parameters to cortical LTP/LTD data. A very heavy operation.
+ 
+ fitter_fewer1withCK_check_given.py
+  -A python script that runs a single simulation of the best given parameter sets from the fitting of cortical LTP/LTD data.
+
+ fitter_fewer_check.py
+  -A python script that re-runs the best models with the fitted parameters and saves the time courses in a high resolution. Needed for Fig. 9.
+
+ fitter_fewer_check_given.py
+  -A python script that re-runs the best given models with the fitted parameters and saves the time courses in a high resolution. Needed for Fig. 9.
+
+ fitter_manyb_check_given.py
+  -A python script that re-runs the best given models for the fitting where many parameters were optimized and saves the time courses in a high resolution. Needed for Fig. 9.
+
+ mesh_general.out
+  -A data file produced by NeuroRD simulator but used as an input in some of the files in this folder too.
+
+ model_nrn_altered_noU.py
+  -The main simulation script. Loads the model and runs the simulation using NEURON RxD. Used for almost all figures.
+
+ model_nrn_altered_noU_extfilename_lowmem_recall.py
+  -The same as model_nrn_altered_noU.py, but saves the simulation data into an file name given as an argument. Records all species
+   mentioned in protocols.py. Free Ca2+ recoded in high temporal resolution, others downsampled.
+
+ model_nrn_altered_noU_simpleflux_extfilename_lowmem.py
+  -The same as model_nrn_altered_noU.py, but saves the simulation data into an file name given as an argument. Records all species
+   mentioned in protocols.py using a low resolution.
+
+ model_nrn_altered_noU_noninterp.py
+  -The same as model_nrn_altered_noU.py, but does not down-sample the output data. Results in super large files.
+
+ model_nrn_oldCaM_altered_noU.py
+  -The same as model_nrn_altered_noU.py, but uses the old CaM activation model (as in Jedrzejewska-Szmek et al. 2017)
+
+ model_nrn_oldPKA_altered_noU.py
+  -The same as model_nrn_altered_noU.py, but uses the old PKA activation model (as in Jedrzejewska-Szmek et al. 2017)
+
+ model_nrn_paired.py
+  -The same as model_nrn_altered_noU.py, but uses Ca fluxes that are determined by the NMDAR-conducted Ca currents in ../L23PC
+   based on the paired stimulus protocol.
+
+ model_nrn_testPKA_withdiss.py
+  -A minimal model for testing the PKA activation as descrived in Jedrzejewska-Szmek et al. 2017. Used for Fig. 1.
+
+ model_nrn_testPKA_withdiss_williamson_varyrates.py
+  -A minimal model for testing the PKA activation as descrived in Williamson et al. 2009. Used for Fig. 1.
+
+ mytools.py
+  -Generic tools
+
+ protocols_many.py
+  -Stimulation protocols used in Fig. 9 and species recorded for Fig. 3
+
+ protocols_many_78withoutCK.py
+  -Stimulation protocols used in Fig. 9, two data sets being fitted without data on CK-blocked experiments
+
+ protocols_many_78withoutCK_1withCK.py
+  -Stimulation protocols used in Fig. 9, two data sets being fitted without data on CK-blocked experiments,  and one data set
+   with an additional CK-blocked experiment
+
+ reactionGraph.mat
+  -A graph made out of the reactions where the nodes are the species and the edges represent information whether there's a reaction affecting the two species.
+
+ runfig1.sh
+  -A script that runs NEURON simulations needed for Fig. 1
+
+ runfig3.sh
+  -A script that runs NEURON simulations needed for Fig. 3
+
+ runfig4-5.sh
+  -A script that runs NEURON simulations needed for Fig. 4-5
+
+ runfig4_1.sh
+  -A script that runs NEURON simulations needed for Extended data Fig. 4.1
+
+ runfig6.sh
+  -A script that runs NEURON simulations needed for Fig. 6
+
+ runfig9.sh
+  -A script that runs NEURON simulations needed for Fig. 9 panels A-C
+
+ simsteadystate_flexible.py
+  -Runs simulations with steady-state fluxes. Uses script model_nrn_altered_noU_extfilename_lowmem_recall.py with a range
+   of Ca2+ flux amplitudes and a given neuromodulator flux $FLUX - saves to steadystate_flux${FLUX}.sav. Used for Fig. 3.
+
+</pre></html>
