@@ -1,63 +1,79 @@
-<html><pre>
-Scripts used for the single-compartment simulations of the plasticity in the post-synaptic spine using NeuroRD simulator. Contains
-also the scripts for printing the Table of reactions.
+<html>
+  <style>
+    code {
+      color: green;
+      white-space: pre;
+      display: block;
+      margin: 1em;
+      margin-left: 2em;
+    }
+  </style>  
+<p>Scripts used for the single-compartment simulations of the plasticity in the post-synaptic spine using NeuroRD simulator. Contains
+also the scripts for printing the Table of reactions.</p>
 
-N.B. The NeuroRD simulations are run from the Python script runmodel_parallel.py, on line 157, after the script has created all necessary xml files: 
-  java -jar neurord-3.2.3-all-deps.jar -Dneurord.writers=text model_XXX.xml
+<p>N.B. The NeuroRD simulations are run from the Python script runmodel_parallel.py, on line 157, after the script has created all necessary xml files: 
+<code>java -jar neurord-3.2.3-all-deps.jar -Dneurord.writers=text model_XXX.xml</code>
 (where model_XXX.xml is the main xml file made by the python script)
 This may not work on all systems. I ran it this way on a CentOS Linux machine where Java 1.8.0_131 was installed. However, on another machine (macOS)
 I had to use a slightly different command:
-  java --add-modules java.se.ee -jar neurord-3.2.3-all-deps.jar -Dneurord.writers=text model_XXX.xml
+  <code>java --add-modules java.se.ee -jar neurord-3.2.3-all-deps.jar -Dneurord.writers=text model_XXX.xml</code>
 The important thing is that in both cases I used the -Dneurord.writers=text flag, which bypasses the jhdf5 and uses txt outputs. If you use jhdf5
 (which is actually recommended as it saves a lot of space), you'll have to rewrite the parts of the script that read the model outputs.
+</p>
 
-Files included:
+Files included:<br><br>
  IC_oldCaM.xml
-  -Initial concentrations in the simulations that used the old calmodulin binding rules
+  <ul><li>Initial concentrations in the simulations that used the old calmodulin binding rules</li></ul>
 
  IC_singlecompartment.xml
-  -Initial concentrations used in the main set of simulations. N.B. these values are not steady-state values. To get proper reaction dynamics,
-   the script runsteadystate.sh has to be run - this script saves a .mat file that will be used for creating an IC file with steady-state concentrations.
+ <ul><li>Initial concentrations used in the main set of simulations. N.B. these values are not steady-state values. To get proper reaction dynamics,
+   the script runsteadystate.sh has to be run - this script saves a .mat file that will be used for creating an IC file with steady-state concentrations.</li></ul>
 
  Model_template.xml
-  -A template for the main NeuroRD simulations
+ <ul><li>A template for the main NeuroRD simulations</li></ul>
 
  Morphology.xml
-  -Dimension of the modelled spine
+ <ul><li>Dimension of the modelled spine</li></ul>
 
  Reactions.xml
-  -Set of reactions
+ <ul><li>Set of reactions</li></ul>
 
  Reactions_oldCaM.xml
-  -Set of reactions with the old calmodulin binding rules
+ <ul><li>Set of reactions with the old calmodulin binding rules</li></ul>
 
  Stimulations_template.xml
-  -A template for the stimulations used in NeuroRD simulations
+ <ul><li>A template for the stimulations used in NeuroRD simulations</li></ul>
 
  analyzeoutfile.py
-  -A file needed for extracting data from .mat file into and IC file
+ <ul><li>A file needed for extracting data from .mat file into and IC file</li></ul>
 
  mesh_general.out
-  -A mesh file
+ <ul><li>A mesh file</li></ul>
 
  neurord-3.2.3-all-deps.jar
-  -The NeuroRD java jar file
+ <ul><li>The NeuroRD java jar file</li></ul>
 
  printtab1.py
-  -A python script for printing Tab. 1
+ <ul><li>A python script for printing Tab. 1</li></ul>
 
  runmodel_parallel.py
-  -The main python script for running the NeuroRD simulations. Makes the needed .xml files based on the Reactions.xml, the IC file and the template xml files
-   and runs the simulation. Deletes the temporary .xml files afterwards (and the huge out files) and saves interpolated results into a .mat file.
+ <ul><li>The main python script for running the NeuroRD simulations. Makes the needed .xml files based on the Reactions.xml, the IC file and the template xml files
+   and runs the simulation. Deletes the temporary .xml files afterwards (and the huge out files) and saves interpolated results into a .mat file.</li></ul>
 
- runfig3_nrd.sh
-  -A script that runs the NeuroRD simulations of steady-state inputs needed for Fig. 3
+ runfig2_nrd.sh
+ <ul><li>A script that runs the NeuroRD simulations of steady-state inputs needed for Fig. 2</li></ul>
 
- runfig4-5_nrd.sh 
-  -A script that runs the HFS and LFS simulations needed for Fig. 4 and 5
+ runfig3-4_nrd.sh 
+ <ul><li>A script that runs the HFS and LFS simulations needed for Fig. 3 and 4</li></ul>
 
  runsteadystate.sh
-  -A script that simulates the steady state solution in the absence of any inputs. This should be run before any other NeuroRD simulations.
+ <ul><li>A script that simulates the steady state solution in the absence of any inputs. This should be run before any other NeuroRD simulations.</li></ul>
 
 
-</pre></html>
+</html>
+
+
+
+
+
+

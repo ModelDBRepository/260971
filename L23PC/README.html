@@ -1,44 +1,67 @@
-<html><pre>
-Scripts used for the multi-compartmental NEURON simulations in order to determine the Ca2+ currents through NMDA-receptor channels when the timing between pre- and post-synaptic
-stimulation is varied. The minimum amount of data for drawing Fig. 6 is pre-saved in the .mat files. The mod mechanisms and hoc files are from the NMC portal: https://bbp.epfl.ch/nmc-portal/
+<html>
+<style>
+  code {
+    color: green;
+  }
+</style>
+<p>Scripts used for the multi-compartmental NEURON simulations in order to determine the Ca2+ currents through NMDA-receptor channels when the timing between pre- and post-synaptic
+stimulation is varied. The minimum amount of data for drawing Fig. 6 is pre-saved in the .mat files. The mod mechanisms and hoc files are from the NMC portal: 
+<a href="https://bbp.epfl.ch/nmc-portal/">https://bbp.epfl.ch/nmc-portal/</a></p>
 
-Scripts adapted by Tuomo Maki-Marttunen 2018-2020 from simulation scripts at https://bbp.epfl.ch/nmc-portal/microcircuit#/metype/L23_PC_cADpyr/details (CC BY-NC-SA 4.0)
+<p>Scripts adapted by Tuomo Maki-Marttunen 2018-2020 from simulation scripts at <a href="https://bbp.epfl.ch/nmc-portal/microcircuit#/metype/L23_PC_cADpyr/details">https://bbp.epfl.ch/nmc-portal/microcircuit#/metype/L23_PC_cADpyr/details</a> (CC BY-NC-SA 4.0)</p>
 
-Files and directories included:
+Files and directories included:<br><br>
  L23_PC_cADpyr229_*
-  -Directories containing the morphology files of five L23PCs.
+  <ul><li>Directories containing the morphology files of five L23PCs.</li></ul>
  biophysics.hoc
-  -A hoc file containing the biophysical parameters of all five L23PCs.
+ <ul><li>A hoc file containing the biophysical parameters of all five L23PCs.</li></ul>
 
- collectcurrs_manyinputs_varyNMDA_oneISI.py
-  -A python file used for collecting data from simulations with different random numberr seeds.
+ collectlocalcurrswithV.py
+ <ul><li>A python file used for collecting data from simulations with different random number seeds.</li></ul>
 
- currClips*_neckLen0.5_neckDiam0.1_stimfreq1.0_pulseamp5.0_Nsyn1_Ninputs1apic250-300_Econ0.0004_wNMDA7.0_ISI*.mat
-  -Pre-saved mat-files saved by collectcurrs_manyinputs_varyNMDA_oneISI.py
+ currClips*_imut0_neckLen0.5_neckDiam0.1_stimfreq1.0_pulseamp5.0_Nsyn1_Ninputs1apic250-300_Econ0.001_wNMDA3.2_Npulses4_ISI*_withV.mat
+ <ul><li>Pre-saved mat-files saved by collectcurrs_manyinputs_varyNMDA_oneISI.py</li></ul>
 
  init_nogui.hoc
-  -A hoc file for initializing the simulations
+ <ul><li>A hoc file for initializing the simulations</li></ul>
 
  mechanisms
-  -A directory for the mod files (ion-channel mechanisms)
+ <ul><li>A directory for the mod files (ion-channel mechanisms)<br>
+  In order to run any of these scripts, first compile the mechanisms by running
+  <code>nrnivmodl ./mechanisms</code></li></ul>
 
  morph_accurate_segdata_icell*.sav
-  -Pre-saved data files for plotting the morphology of all five cells
+ <ul><li>Pre-saved data files for plotting the morphology of all five cells</li></ul>
 
  morphology.hoc
-  -A hoc file for loading the morphologies of the five cells
+ <ul><li>A hoc file for loading the morphologies of the five cells</li></ul>
 
  mytools.py
-  -Generic tools
+ <ul><li>Generic tools</li></ul>
 
- runmodelsyns_exconly_stim_localspines_manyinputs_varyNMDA.py
-  -A python script for running the simulation of the paired stimulus protocol
-
+ runmodelwithV.py
+ <ul><li>A python script for running the simulation of the paired stimulus protocol</li>
+  <li>Usage: 
+    <code style="white-space: pre; display: block">python runmodelwithV.py $ICELL $IMUT $FREQ $NSTIM $NSYN $NINPUTS $DENDTREE $SPINELOCATIONS $RATE $Npulses $ISI $DTPULSES $PULSEAMP $NECKLEN $NECKDIAM $ECON $WNMDA $RDSEED 0</code><br>
+    To run the simulations needed for the currClips-files, do the following:
+    <code style="white-space: pre; display: block;">
+    for ISI in -200.0 -180.0 -160.0 -140.0 -120.0 -100.0 -80.0 -60.0 -50.0 -40.0 -30.0 -25.0 -20.0 -15.0 -10.0 -5.0 0.0 5.0 10.0 15.0 20.0 25.0 30.0 40.0 50.0 60.0 80.0 100.0 120.0 140.0 160.0 180.0 200.0 -210.0 -220.0 -230.0; do
+      for iSAMP in `seq 0 199`; do
+        python runmodelwithV.py 0 0 1.0 100 10 1 apic 250-300 0.7 4 $ISI 10.0 5.0 0.5 0.1 0.001 3.2 $iSAMP 0
+      done
+      python collectlocalcurrswithV.py 0 0 10 0.001 3.2 5.0 apic 250-300 1.0 $ISI 4
+      rm noisy*.mat # Suggested to delete raw data afterwards, otherwise they take a lot of disk space
+    done
+    </code>
+    </li></ul>
  template.hoc
-  -A hoc file with the cell templates
+  <ul><li>A hoc file with the cell templates</li></ul>
 
 
-In order to run any of these scripts, first compile the mechanisms by running
-nrnivmodl ./mechanisms
+</html>
 
-</pre></html>
+
+
+
+
+

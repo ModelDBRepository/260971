@@ -1,72 +1,101 @@
-<html><pre>
-This is a single-compartment model of cortical synapse and the intracellular signaling within as described in
-M&auml;ki-Marttunen T, Iannella N, Edwards AG, Einevoll GT, Blackwell KT: A unified computational model for cortical post-synaptic plasticity.
-
+<html>
+  <style>
+    .readme-indented {margin-left: 2em}
+    code {
+      color: green;
+      white-space: pre-wrap;
+      display: block;
+      margin: 1em;
+      margin-left: 2em;
+    }
+  </style>
+This is a single-compartment model of cortical synapse and the intracellular signaling within as described in<br><br>
+<div class="readme-indented">
+M&auml;ki-Marttunen T, Iannella N, Edwards AG, Einevoll GT, Blackwell KT: A unified computational model for cortical post-synaptic plasticity. eLife 2020;9:e55714
+</div>
+<br><br>
 Three folders are included in this ModelDB entry:
 L23PC 
-  A model from NMC portal: https://bbp.epfl.ch/nmc-portal/downloads. Includes scripts used for calculation of the Ca2+ transients through
-  NMDA receptors in the paired-stimulus experiment. Pre-calculated data included for running the scripts needed for reproduction of Figure 6.
-  
+<div class="readme-indented">
+  A model from NMC portal: <a href="https://bbp.epfl.ch/nmc-portal/downloads">https://bbp.epfl.ch/nmc-portal/downloads</a>. Includes scripts used for calculation of the Ca2+ transients through
+  NMDA receptors in the paired-stimulus experiment. Pre-calculated data included for running the scripts needed for reproduction of Figure 5.
+</div>
+<br><br>
 NEURON
+<div class="readme-indented">
   Scripts used for the single-compartment simulations of the plasticity in the post-synaptic spine using NEURON RxD simulator. Contains
   also the scripts for drawing the Figures of the paper.
-
+</div>
+<br><br>
 NeuroRD
+<div class="readme-indented">
   Scripts used for the single-compartment simulations of the plasticity in the post-synaptic spine using NeuroRD simulator.
-
+</div>
+<br><br>
 Software:
- -The scripts assume the command "python" runs Python 2.7 with packages neuron (v7.5), numpy, scipy, and matplotlib installed. For Python 3,
-  the print commands should be reformatted to have parentheses and the "<>" signs in model_nrn*.py and simsteadystate_flexible.py should be
-  replaced by "!="
- -The NeuroRD simulations worked with Java version 1.8.0_131
-
-To draw Fig. 1, run the following commands (if you get errors see NEURON/README.html for issues with NEURON RxD version):
-<font color=green>
+<ul>
+  <li>
+    The scripts assume the command "python" runs Python 2.7 with packages neuron (v7.5), numpy, scipy, and matplotlib installed. For Python 3,
+    the print commands should be reformatted to have parentheses and the "<>" signs in model_nrn*.py and simsteadystate_flexible.py should be
+    replaced by "!=", and possibly some other changes to pickle and scipy.io commands.   
+  </li>
+  <li>
+    The NeuroRD simulations worked with Java version 1.8.0_131
+  </li>
+</ul>
+To draw Fig. 11 (Model calibration figure; Methods), run the following commands (if you get errors see NEURON/README.html for issues with NEURON RxD version):
+<code>
 cd NEURON
-sh runfig1.sh     
-python drawfig1.py
+sh runfig11.sh     
+python drawfig11.py
 cd ..
-</font>
+</code>
 
-To draw Fig. 3, run the following commands (if you get errors see NeuroRD/README.html for issues with the java command):
-<font color=green>
+To draw Fig. 2 (Activation of PKA, PKC, and CaMKII pathways with varying Ca input), run the following commands (if you get errors see NeuroRD/README.html for issues with the java command):
+<code>
 cd NeuroRD
 sh runsteadystate.sh
-sh runfig3_nrd.sh
+sh runfig2_nrd.sh
 cd ../NEURON
-sh runfig3.sh
-python drawfig3.py
+sh runfig2.sh
+python drawfig2.py
 cd ..
-</font>
+</code>
 
-To draw Fig. 4 and 5 and Extended data Fig. 4.1, run the following commands:
-<font color=green>
+To draw Fig. 3 and 4 and Suppl. Fig. 3.1, run the following commands:
+<code>
 cd NeuroRD
 #sh runsteadystate.sh #skip this if you ran it already for Fig. 3
-sh runfig4_nrd.sh
-cd NEURON
-sh runfig4-5.sh
-sh runfig4_1.sh
+sh runfig3-4_nrd.sh
+cd ../NEURON
+sh runfig3-4.sh
+sh runfig3_1.sh
+python drawfig3.py
 python drawfig4.py
-python drawfig5.py
-python drawfig4_1.py
+python drawfig3_1.py
 cd ..
-</font>
+</code>
 
-To draw Fig. 6, run the following commands:
-<font color=green>
+To draw Fig. 5, run the following commands:
+<code>
 cd NEURON
-sh runfig6.sh
-python drawfig6.py
+sh runfig5.sh
+python drawfig5.py
 cd ..
-</font>
+</code>
 
 To draw Fig. 9 panels A-C, run the following commands:
-<font color=green>
+<code>
 cd NEURON
 sh runfig9.sh
 python drawfig9abc.py
 cd ..
-</font>
+</code>
 
-</pre></html>
+</html>
+
+
+
+
+
+
