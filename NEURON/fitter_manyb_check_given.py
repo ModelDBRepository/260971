@@ -349,7 +349,7 @@ def func_to_optimize(parameters,saveFig="",deleteFiles=True,rankID=0):
 def checkpopulation(population, columns, gen, gensdonealready):
   picklelist = [population, columns]
   print 'Generation '+str(gen)+' done, saving to manyb'+str(imeas)+'_seed'+str(myseed)+'_N'+str(N_samples)+'_tmp'+str(gensdonealready+gen)+'.sav'
-  file=open('manyb'+str(imeas)+'_seed'+str(myseed)+'_N'+str(N_samples)+'_tmp'+str(gensdonealready+gen)+'.sav', 'w')
+  file=open('fitfiles/manyb'+str(imeas)+'_seed'+str(myseed)+'_N'+str(N_samples)+'_tmp'+str(gensdonealready+gen)+'.sav', 'w')
   pickle.dump(picklelist,file)
   file.close() 
 
@@ -363,7 +363,8 @@ N_generations = 50
 # p_m: probabily of mutation of a parameter (holds for each parameter independently)
 
 random.seed(imeas*1000000+myseed+istart)
-filename = 'manyb'+str(imeas)+'_seed'+str(myseed)+'_N'+str(N_samples)
+filename = 'fitfiles/manyb'+str(imeas)+'_seed'+str(myseed)+'_N'+str(N_samples)
+filenamerun = 'fitfiles/rungiven_manyb'+str(imeas)+'_seed'+str(myseed)+'_N'+str(N_samples)
 
 myemoo = emoo.Emoo(N = N_samples, C = C_samples, variables = VARIABLES, objectives = OBJECTIVES)
 myemoo.setup(eta_m_0 = 20, eta_c_0 = 20, p_m = 0.5)
@@ -380,9 +381,9 @@ for isamp in range(istart,istart+min(maxPerGroupCheck,len(goodparams))):
     paramdict[VARIABLES[iparam][0]] = goodparams[isamp][iparam]
   if counter%myemoo.comm.size == myemoo.comm.rank:
     print "rank = "+str(myemoo.comm.rank)+", running isamp = "+str(isamp)+", counter = "+str(counter)+", file "+'fitfiles/rungiven_'+filename+'_maxerr'+str(maxerr)+'_maxcaerr'+str(maxcaerr)+'_'+str(isamp)
-    mydict,A = func_to_optimize(paramdict,'fitfiles/rungiven_'+filename+'_maxerr'+str(maxerr)+'_maxcaerr'+str(maxcaerr)+'_'+str(isamp),True)
+    mydict,A = func_to_optimize(paramdict,filenamerun+'_maxerr'+str(maxerr)+'_maxcaerr'+str(maxcaerr)+'_'+str(isamp),True)
     picklelist = [mydict, A]
-    file=open('fitfiles/rungiven_'+filename+'_maxerr'+str(maxerr)+'_maxcaerr'+str(maxcaerr)+'_'+str(isamp)+'.sav','w')
+    file=open(filenamerun+'_maxerr'+str(maxerr)+'_maxcaerr'+str(maxcaerr)+'_'+str(isamp)+'.sav','w')
     pickle.dump(picklelist,file)
     file.close()       
   counter = counter + 1

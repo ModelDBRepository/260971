@@ -92,18 +92,23 @@ def func_to_optimize(parameters,saveFig="",deleteFiles=True,rankID=0):
   for iobjective in range(0,len(OBJECTIVE_DATA)):
     objs_thisobj = []
     times = timesAll[0]
+    if times.shape[0] == 1:
+      times = times.T
     timeCourses = mytools.interpolate(times[0],timeCoursesAll[0][imeas[iobjective]],OBJECTIVE_ts)
     mydict['f'+str(iobjective)] = sum(abs(array(timeCourses)-array(OBJECTIVE_DATA[iobjective])))/max(array(OBJECTIVE_DATA[iobjective]))
 
     if len(saveFig) > 0:
+     try:
       axarr[iobjective].plot(OBJECTIVE_ts_highres,OBJECTIVE_DATA_highres[iobjective],'b--')
       axarr[iobjective].plot(OBJECTIVE_ts,OBJECTIVE_DATA[iobjective],'bx')
-      axarr[iobjective].plot(times[0],timeCoursesAll[0][imeas[iobjective]],'r--')
+      axarr[iobjective].plot(times,timeCoursesAll[0][imeas[iobjective]],'r--')
       axarr[iobjective].plot(OBJECTIVE_ts,timeCourses,'rx')
       #axarr[iobjective].text(times[0],Ylims[1]*0.2+Ylims[0]*0.8,str(objs[iobjective]),fontsize=5)
       #axarr[iobjective].set_ylabel(Objective_titles[iobjective],fontsize=5)
       for tick in axarr[iobjective].xaxis.get_major_ticks() + axarr[iobjective].yaxis.get_major_ticks():
         tick.label.set_fontsize(3.5)
+     except:
+      print "Something wrong here..."
     Ylims = axarr[iobjective].get_ylim()
     if iobjective == 0:
       axarr[0].text(OBJECTIVE_ts[0],Ylims[1]*0.8+Ylims[0]*0.2,str(parameters),color='#0000FF',fontsize=5)

@@ -109,10 +109,10 @@ def run_model(parameters,saveFig="",deleteFiles=True,rankID=0):
   DATA_all_all_all = []
   for iexperiment in range(0,len(Ca_input_fluxes)):
     randomString = ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') for _ in range(0,10))+'_'+str(rankID)
-    print('python model_nrn_altered_noU_extfilename_lowmem_recall_local.py '+str(Duration)+' '+str(tolerance)+' '+str(Ca_input_onset)+' '+str(Ca_input_N)+' '+str(Ca_input_freq)+' '+str(Ca_input_dur)+' '+
+    print('python model_nrn_altered_noU_extfilename_lowmem_recall.py '+str(Duration)+' '+str(tolerance)+' '+str(Ca_input_onset)+' '+str(Ca_input_N)+' '+str(Ca_input_freq)+' '+str(Ca_input_dur)+' '+
            str(Ca_input_fluxes[iexperiment])+' '+str(L_input_flux)+' '+str(Glu_input_flux)+' '+str(ACh_input_flux)+' '+
            str(Ntrains)+' '+str(trainT)+' None fit'+randomString+' '+addition_IC+' '+addition_IC_values+' '+addition_ks+' '+addition_ks_values)
-    os.system('python model_nrn_altered_noU_extfilename_lowmem_recall_local.py '+str(Duration)+' '+str(tolerance)+' '+str(Ca_input_onset)+' '+str(Ca_input_N)+' '+str(Ca_input_freq)+' '+str(Ca_input_dur)+' '+
+    os.system('python model_nrn_altered_noU_extfilename_lowmem_recall.py '+str(Duration)+' '+str(tolerance)+' '+str(Ca_input_onset)+' '+str(Ca_input_N)+' '+str(Ca_input_freq)+' '+str(Ca_input_dur)+' '+
            str(Ca_input_fluxes[iexperiment])+' '+str(L_input_flux)+' '+str(Glu_input_flux)+' '+str(ACh_input_flux)+' '+
            str(Ntrains)+' '+str(trainT)+' None fit'+randomString+' '+addition_IC+' '+addition_IC_values+' '+addition_ks+' '+addition_ks_values)
     print('Exp. '+str(iexperiment)+', ID='+str(rankID)+' done in '+str(time.time()-timenow)+' sec')

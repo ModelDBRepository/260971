@@ -2610,9 +2610,10 @@ also make all rates even (4x) slower to saturate at lower DAG? -->
         <Q10>         0.2           </Q10>
     </Reaction>
 
-    <!--  DAG   + DAGK <-> DAGKdag -> PA   step 2 (Kcat is on the high side, could be half the rate)-->
+    <!--  DAG   + DAGK <-> DAGKdag -> DAGK + PA   step 2 (Kcat is on the high side, could be half the rate)-->
     <Reaction name = "DAGKdag1" id="DAGKdag1">
          <Reactant specieID="DAGKdag"            />
+        <Product  specieID="DAGK"        />
         <Product  specieID="PA"        />
 
         <forwardRate> 0.2e-03      </forwardRate>
